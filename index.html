@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fresh Coffee & Breakfast | DayBreak Cafe</title>
+  <meta name="description" content="DayBreak Cafe in Queanbeyan – fresh coffee, all-day breakfast, and homemade treats in a relaxed local space. View our menu or get directions today.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <div class="logo">DayBreak Cafe</div>
+  <button class="nav-toggle" aria-label="Toggle navigation" onclick="toggleNav()">☰</button>
+  <nav>
+    <ul id="nav-menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" aria-label="DayBreak Cafe hero">
+    <div class="hero-content">
+      <h1>DayBreak Cafe</h1>
+      <p>Fresh coffee, all-day breakfast, and homemade treats in the heart of Queanbeyan.</p>
+
+      <div class="hero-cta-row">
+        <button class="btn" onclick="alert('Online ordering coming soon!')">Order Online (Coming Soon)</button>
+        <button class="btn" onclick="window.location.href='menu.html'">
+          View Menu
+        </button>
+        <a class="btn btn-outline" href="tel:+61261234567">
+          Call Now
+        </a>
+        <a class="btn btn-outline" href="https://www.google.com/maps/place/1%2F99+Monaro+St,+Queanbeyan+NSW+2620" target="_blank" rel="noopener">
+          Get Directions
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>About DayBreak Cafe</h2>
+    <div class="about-grid">
+      <div>
+        <p class="section-text">
+          DayBreak Cafe is a cozy, independently owned spot serving specialty coffee, all-day breakfast and relaxed lunches.
+          We focus on good ingredients, friendly service, and a warm local atmosphere.
+        </p>
+        <p class="section-text">
+          Whether you are grabbing a quick takeaway or staying with friends, our goal is to make you feel at home.
+        </p>
+
+        <h2>Why you will love us</h2>
+        <ul class="usp-list">
+          <li>Specialty coffee made with locally roasted beans.</li>
+          <li>Homemade pastries and seasonal brunch dishes.</li>
+          <li>Relaxed atmosphere with free Wi‑Fi and plenty of natural light.</li>
+        </ul>
+
+        <button class="btn" style="margin-top:15px;" onclick="window.location.href='menu.html'">
+          See Our Menu
+        </button>
+      </div>
+
+      <div>
+        <h2>Location</h2>
+        <p>1/99 Monaro Street, Queanbeyan NSW 2620</p>
+        <p>
+          <a href="https://www.google.com/maps/place/1%2F99+Monaro+St,+Queanbeyan+NSW+2620" target="_blank" rel="noopener">
+            Open in Google Maps
+          </a>
+        </p>
+        <div class="map-container" aria-label="Map showing approximate location of DayBreak Cafe">
+          <iframe
+            src="https://www.google.com/maps?q=1%2F99+Monaro+St,+Queanbeyan+NSW+2620&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="DayBreak Cafe on Google Maps">
+          </iframe>
+        </div>
+
+        <h2 style="margin-top:15px;">Opening Hours</h2>
+        <table class="hours-table">
+          <tr><th>Day</th><th>Hours</th></tr>
+          <tr><td>Monday</td><td>7:00 am – 3:00 pm</td></tr>
+          <tr><td>Tuesday</td><td>7:00 am – 3:00 pm</td></tr>
+          <tr><td>Wednesday</td><td>7:00 am – 3:00 pm</td></tr>
+          <tr><td>Thursday</td><td>7:00 am – 3:00 pm</td></tr>
+          <tr><td>Friday</td><td>7:00 am – 3:00 pm</td></tr>
+          <tr><td>Saturday</td><td>8:00 am – 2:00 pm</td></tr>
+          <tr><td>Sunday</td><td>8:00 am – 2:00 pm</td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section aria-label="Customer trust">
+    <h2>Locally Owned, Since 2026</h2>
+    <p class="section-text">
+      We are a locally owned cafe, proud to serve our community with good coffee and relaxed brunches.
+      Coffee beans are sourced from Australian roasters who focus on quality and sustainability.
+    </p>
+    
+  </section>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-section">
+      <h3>DayBreak Cafe</h3>
+      <p>1/99 Monaro Street, Queanbeyan NSW 2620</p>
+      <p>Phone: <a href="tel:+61261234567">(02) 6123 4567</a></p>
+      <p>Email: <a href="mailto:hello@daybreakcafe.com.au">hello@daybreakcafe.com.au</a></p>
+    </div>
+    <div class="footer-section">
+      <h3>Opening Hours</h3>
+      <p>Mon – Fri: 7:00 am – 3:00 pm</p>
+      <p>Sat – Sun: 8:00 am – 2:00 pm</p>
+      <p>Locally owned &amp; operated</p>
+    </div>
+    <div class="footer-section">
+      <h3>Connect</h3>
+      <div class="social-links">
+        <a href="#" target="_blank" rel="noopener">Instagram</a>
+        <a href="#" target="_blank" rel="noopener">Facebook</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 DayBreak Cafe. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleNav() {
+    var menu = document.getElementById('nav-menu');
+    menu.classList.toggle('show');
+  }
+</script>
+
+</body>
+</html>
