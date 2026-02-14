@@ -1,0 +1,92 @@
+h1 {
+  font-size: 2rem;
+  color: #3e2723;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.intro {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 0.95rem;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 900px) {
+  .menu-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.menu-section {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 15px 15px 10px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.menu-section h2 {
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+  color: #4e342e;
+  border-bottom: 1px solid #e0d4c8;
+  padding-bottom: 4px;
+}
+
+.menu-section small {
+  display: block;
+  font-size: 0.8rem;
+  color: #777;
+  margin-bottom: 8px;
+}
+
+.menu-item {
+  margin-bottom: 10px;
+}
+
+.menu-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.item-name {
+  font-weight: bold;
+  font-size: 0.98rem;
+}
+
+.item-price {
+  margin-left: 10px;
+  white-space: nowrap;
+  color: #4e342e;
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+.item-desc {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.tag {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  margin-left: 4px;
+  color: #8d6e63;
+}
+
+/* Simple footer style for standalone menu page variant */
+
+footer {
+  background-color: #3e2723;
+  color: #fff;
+  padding: 15px 20px;
+  margin-top: 20px;
+  font-size: 0.9rem;
+  text-align: center;
+}
