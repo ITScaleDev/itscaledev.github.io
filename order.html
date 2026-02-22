@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Order Online | DayBreak Cafe</title>
+<meta name="description" content="Order your breakfast, lunch, coffee, and smoothies online.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/menu.css">
+
+<style>
+/* Grid layout: Menu + Cart */
+.container { max-width: 1200px; margin: 40px auto; display: grid; grid-template-columns: 2fr 1fr; gap: 30px; }
+.card { background: #fff; border-radius: 12px; box-shadow: 0 6px 18px rgba(0,0,0,0.06); padding: 25px; }
+.menu-item { display: flex; justify-content: space-between; flex-direction: column; padding: 12px 0; border-bottom: 1px solid #eee; }
+.menu-item-name { font-weight: 600; font-size: 1.1rem; }
+.menu-item-desc { font-size: 0.9rem; color: #555; margin: 4px 0; }
+.menu-item-price { margin-top: 6px; display: flex; justify-content: space-between; align-items: center; }
+.menu-item button { background: #d97706; color: #fff; border: none; border-radius: 6px; padding: 6px 14px; cursor: pointer; }
+.menu-item button:hover { background: #b45309; }
+#cartList { list-style: none; padding: 0; max-height: 500px; overflow-y: auto; }
+#cartList li { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #eee; }
+#cartList li button { background: #ef4444; border-radius: 6px; padding: 3px 8px; border: none; cursor: pointer; }
+.closed { background: #fee2e2; padding: 15px; border-radius: 8px; color: #b91c1c; font-weight: bold; margin-bottom: 20px; }
+input { width: 100%; padding: 8px; margin: 6px 0; border-radius: 6px; border: 1px solid #ccc; }
+button.checkout { background: #10b981; margin-top: 10px; width: 100%; padding: 10px; font-size: 16px; }
+button.checkout:hover { background: #059669; }
+h2,h3,h4 { margin-bottom: 12px; }
+.captcha-box { margin: 12px 0; font-weight: bold; }
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">DayBreak Cafe</div>
+  <div class="nav-toggle" onclick="toggleNav()">☰</div>
+  <nav>
+    <ul id="nav-menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="order.html">Order Online</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main class="container">
+  <!-- Menu Column -->
+  <div class="card">
+    <h2>Our Menu</h2>
+    <div id="storeStatus"></div>
+
+    <!-- Breakfast Example -->
+    <h4>Breakfast (Until 11:30am)</h4>
+    <div class="menu-item">
+      <div class="menu-item-name">Coconut Chia Pudding</div>
+      <div class="menu-item-desc">Chia seeds soaked in coconut milk, topped with tropical fruits and fresh berries.</div>
+      <div class="menu-item-price"><span>$21.00</span><button onclick="addToCart('Coconut Chia Pudding',21)">Add</button></div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-name">Mediterranean Healthy Bowl</div>
+      <div class="menu-item-desc">Grilled zucchini, marinated chickpeas, roasted peppers and caramelised onion, finished with soft poached eggs and maple Dijon dressing.</div>
+      <div class="menu-item-price"><span>$23.00</span><button onclick="addToCart('Mediterranean Healthy Bowl',23)">Add</button></div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-name">Eggs on Toast</div>
+      <div class="menu-item-desc">Two eggs your way on sourdough or multigrain toast.</div>
+      <div class="menu-item-price"><span>$16.00</span><button onclick="addToCart('Eggs on Toast',16)">Add</button></div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-name">Breakfast Burrito</div>
+      <div class="menu-item-desc">Flour tortilla with scrambled eggs, spiced potatoes, refried beans, avocado, cheese, chilli jam and salsa.</div>
+      <div class="menu-item-price"><span>$19.00</span><button onclick="addToCart('Breakfast Burrito',19)">Add</button></div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-item-name">Bakehouse Eggs Benedict</div>
+      <div class="menu-item-desc">Two poached eggs, wilted spinach and hollandaise on sourdough with your choice of bacon or chorizo.</div>
+      <div class="menu-item-price"><span>$25.00</span><button onclick="addToCart('Bakehouse Eggs Benedict',25)">Add</button></div>
+    </div>
+
+    <!-- Breakfast Sides -->
+    <h4>Breakfast Sides</h4>
+    <div class="menu-item"><div class="menu-item-name">Avocado</div><div class="menu-item-desc">Fresh avocado slices.</div><div class="menu-item-price"><span>$4</span><button onclick="addToCart('Avocado',4)">Add</button></div></div>
+    <div class="menu-item"><div class="menu-item-name">Grilled Bacon</div><div class="menu-item-desc">Crispy smoked bacon.</div><div class="menu-item-price"><span>$5</span><button onclick="addToCart('Grilled Bacon',5)">Add</button></div></div>
+    <div class="menu-item"><div class="menu-item-name">Grilled Chorizo</div><div class="menu-item-desc">Spicy grilled chorizo slices.</div><div class="menu-item-price"><span>$6</span><button onclick="addToCart('Grilled Chorizo',6)">Add</button></div></div>
+    <div class="menu-item"><div class="menu-item-name">Hash Browns</div><div class="menu-item-desc">Crispy potato hash browns.</div><div class="menu-item-price"><span>$4</span><button onclick="addToCart('Hash Browns',4)">Add</button></div></div>
+    <div class="menu-item"><div class="menu-item-name">Roasted Tomato</div><div class="menu-item-desc">Slow-roasted tomato halves.</div><div class="menu-item-price"><span>$4</span><button onclick="addToCart('Roasted Tomato',4)">Add</button></div></div>
+    <div class="menu-item"><div class="menu-item-name">Halloumi</div><div class="menu-item-desc">Grilled halloumi slices.</div><div class="menu-item-price"><span>$5</span><button onclick="addToCart('Halloumi',5)">Add</button></div></div>
+    <div class="menu-item"><div class="menu-item-name">Smoked Salmon</div><div class="menu-item-desc">Fresh smoked salmon slices.</div><div class="menu-item-price"><span>$6</span><button onclick="addToCart('Smoked Salmon',6)">Add</button></div></div>
+
+    <!-- Lunch & Bowls -->
+    <h4>Lunch & Bowls (From 11am)</h4>
+    <div class="menu-item"><div class="menu-item-name">Falafel Bowl (V)</div><div class="menu-item-desc">Falafel, greens, grains and seasonal vegetables with house dressing.</div><div class="menu-item-price"><span>$23</span><button onclick="addToCart('Falafel Bowl (V)',23)">Add</button></div></div>
+    <div class="menu-item"><div class="menu-item-name">Hanoi Bowl</div><div class="menu-item-desc">Rice noodles with shredded vegetables, herbs, spiced chicken and nuoc cham dressing.</div><div class="menu-item-price"><span>$26</span><button onclick="addToCart('Hanoi Bowl',26)">Add</button></div></div>
+    <div class="menu-item"><div class="menu-item-name">Thai Pineapple Fried Rice</div><div class="menu-item-desc">Jasmine rice wok‑tossed with vegetables, pineapple and egg in a light soy sauce.</div><div class="menu-item-price"><span>$23</span><button onclick="addToCart('Thai Pineapple Fried Rice',23)">Add</button></div></div>
+    <div class="menu-item"><div class="menu-item-name">Chicken Fajita Tacos</div><div class="menu-item-desc">Three soft tacos with fajita‑spiced chicken, lettuce, pickled onion and jalapeño‑coriander sauce.</div><div class="menu-item-price"><span>$20</span><button onclick="addToCart('Chicken Fajita Tacos',20)">Add</button></div></div>
+    <div class="menu-item"><div class="menu-item-name">Signature Calamari</div><div class="menu-item-desc">Lemon and black pepper calamari with rocket, tomato and cucumber salsa.</div><div class="menu-item-price"><span>$27</span><button onclick="addToCart('Signature Calamari',27)">Add</button></div></div>
+    <div class="menu-item"><div class="menu-item-name">Bowl of Chips</div><div class="menu-item-desc">Hot chips with creamy garlic sauce.</div><div class="menu-item-price"><span>$10</span><button onclick="addToCart('Bowl of Chips',10)">Add</button></div></div>
+    <div class="menu-item"><div class="menu-item-name">Bowl of Loaded Chips</div><div class="menu-item-desc">House‑seasoned chips with spring onions, fried shallots and cheese sauce.</div><div class="menu-item-price"><span>$12</span><button onclick="addToCart('Bowl of Loaded Chips',12)">Add</button></div></div>
+
+    <!-- Coffee & Iced Drinks -->
+    <h4>Coffee & Iced Drinks</h4>
+    <div class="menu-item"><div class="menu-item-name">Espresso</div><div class="menu-item-desc">Single or double shot.</div><div class="menu-item-price"><span>$4.50</span><button onclick="addToCart('Espresso',4.5)">Add</button></div></div>
+    <div class="menu-item"><div class="menu-item-name">Latte / Cappuccino / Flat White</div><div class="menu-item-desc">Choice of full cream, skim, soy, oat or almond milk.</div><div class="menu-item-price"><span>$5</span><button onclick="addToCart('Latte/Cappuccino/Flat White',5)">Add</button></div></div>
+    <div class="menu-item"><div class="menu-item-name">Iced Latte</div><div class="menu-item-desc">Chilled espresso over ice with cold milk.</div><div class="menu-item-price"><span>$7</span><button onclick="addToCart('Iced Latte',7)">Add</button></div></div>
+    <div class="menu-item"><div class="menu-item-name">Iced Salted Caramel Latte</div><div class="menu-item-desc">Espresso, milk and ice with salted caramel and cream.</div><div class="menu-item-price"><span>$8.50</span><button onclick="addToCart('Iced Salted Caramel Latte',8.5)">Add</button></div></div>
+    <div class="menu-item"><div class="menu-item-name">Iced Chocolate</div><div class="menu-item-desc">Chocolate syrup, milk and ice cream, topped with cream.</div><div class="menu-item-price"><span>$8.50</span><button onclick="addToCart('Iced Chocolate',8.5)">Add</button></div></div>
+    <div class="menu-item"><div class="menu-item-name">Iced Matcha</div><div class="menu-item-desc">Whisked matcha over milk and ice.</div><div class="menu-item-price"><span>$8.90</span><button onclick="addToCart('Iced Matcha',8.9)">Add</button></div></div>
+
+    <!-- Smoothies & Shakes -->
+    <h4>Smoothies & Shakes</h4>
+    <div class="menu-item"><div class="menu-item-name">Mango Smoothie</div><div class="menu-item-desc">Mango, nectar, banana, yoghurt and ice.</div><div class="menu-item-price"><span>$10</span><button onclick="addToCart('Mango Smoothie',10)">Add</button></div></div>
+    <div class="menu-item"><div class="menu-item-name">Banana Smoothie</div><div class="menu-item-desc">Banana, ice cream, milk and honey.</div><div class="menu-item-price"><span>$10</span><button onclick="addToCart('Banana Smoothie',10)">Add</button></div></div>
+    <div class="menu-item"><div class="menu-item-name">Strawberry Banana Smoothie</div><div class="menu-item-desc">Strawberry, banana, milk, yoghurt and honey.</div><div class="menu-item-price"><span>$11</span><button onclick="addToCart('Strawberry Banana Smoothie',11)">Add</button></div></div>
+    <div class="menu-item"><div class="menu-item-name">Flip Out Frappe</div><div class="menu-item-desc">Tropical juice, mango, passionfruit pulp and ice.</div><div class="menu-item-price"><span>$10</span><button onclick="addToCart('Flip Out Frappe',10)">Add</button></div></div>
+
+    <!-- Desserts -->
+    <h4>Desserts</h4>
+    <div class="menu-item"><div class="menu-item-name">Tropical Waffles</div><div class="menu-item-desc">Waffles with pineapple compote, coconut sauce, mango ice‑cream and toasted coconut.</div><div class="menu-item-price"><span>$25</span><button onclick="addToCart('Tropical Waffles',25)">Add</button></div></div>
+    <div class="menu-item"><div class="menu-item-name">Banana Bread</div><div class="menu-item-desc">House‑baked banana bread, toasted with butter.</div><div class="menu-item-price"><span>$6</span><button onclick="addToCart('Banana Bread',6)">Add</button></div></div>
+
+  </div>
+  <!-- Cart Column -->
+  <div class="card">
+    <h3>Your Order</h3>
+    <input type="text" id="customerName" placeholder="Your Name" required>
+    <input type="tel" id="customerPhone" placeholder="Phone Number" required>
+    
+    <!-- Offline CAPTCHA -->
+    <div class="captcha-box">
+      <span id="captchaQuestion"></span><br>
+      <input type="text" id="captchaAnswer" placeholder="Enter answer here" required>
+    </div>
+
+    <ul id="cartList"></ul>
+    <h4>Total: $<span id="total">0</span></h4>
+    <button class="checkout" onclick="checkout()">Place Order & Pay at Counter</button>
+  </div>
+</main>
+
+<footer>
+  DayBreak Cafe · 1/99 Monaro Street, Queanbeyan NSW · (02) 6123 4567 ·
+  <a href="mailto:hello@daybreakcafe.com.au">hello@daybreakcafe.au</a>
+  <a href="https://itscale.com.au/" target="_blank" rel="noopener" style="float: right;">Designed by Itscale</a>
+</footer>
+
+<script>
+function toggleNav(){document.getElementById('nav-menu').classList.toggle('show');}
+
+// ---------- Cart & Order System ----------
+let cart = [], total = 0;
+const openingHour = 7, closingHour = 15;
+let captchaValue = 0;
+
+function checkOpeningHours() {
+  const hour = new Date().getHours();
+  const statusDiv = document.getElementById("storeStatus");
+  if(hour < openingHour || hour >= closingHour){
+      statusDiv.innerHTML = `<div class="closed">Sorry, we are currently closed.<br>Opening Hours: 7:00 AM – 3:00 PM</div>`;
+      return false;
+  } else { statusDiv.innerHTML = ""; return true; }
+}
+
+function addToCart(name, price) {
+  if(!checkOpeningHours()) return;
+  cart.push({name, price});
+  total += price;
+  renderCart();
+}
+
+function renderCart() {
+  const list = document.getElementById("cartList");
+  list.innerHTML = "";
+  cart.forEach((item,index) => {
+    list.innerHTML += `<li>${item.name} - $${item.price.toFixed(2)} <button onclick="removeItem(${index})">X</button></li>`;
+  });
+  document.getElementById("total").innerText = total.toFixed(2);
+}
+
+function removeItem(index){
+  total -= cart[index].price;
+  cart.splice(index,1);
+  renderCart();
+}
+
+function generateCaptcha() {
+  const a = Math.floor(Math.random()*10)+1;
+  const b = Math.floor(Math.random()*10)+1;
+  captchaValue = a+b;
+  document.getElementById("captchaQuestion").innerText = `What is ${a} + ${b}?`;
+}
+
+function checkout() {
+  if(!checkOpeningHours()) return;
+
+  const name = document.getElementById("customerName").value.trim();
+  const phone = document.getElementById("customerPhone").value.trim();
+  const userCaptcha = parseInt(document.getElementById("captchaAnswer").value.trim());
+
+  if(!name || !phone) { alert("Please enter your name and phone."); return; }
+  if(cart.length===0){ alert("Cart is empty"); return; }
+  if(userCaptcha !== captchaValue) { alert("CAPTCHA incorrect. Please try again."); generateCaptcha(); return; }
+
+  const orderNumber = "DB"+Date.now();
+  const newOrder = { orderNumber, customerName: name, customerPhone: phone, items: cart, total, time: new Date().toLocaleTimeString() };
+  console.log("New Order:", newOrder);
+  alert(`Thank you ${name}! Your order ${orderNumber} is placed.`);
+
+  // Reset form
+  cart = []; total = 0; renderCart();
+  document.getElementById("customerName").value="";
+  document.getElementById("customerPhone").value="";
+  document.getElementById("captchaAnswer").value="";
+  generateCaptcha();
+}
+
+checkOpeningHours();
+generateCaptcha();
+</script>
+
+</body>
+</html>
