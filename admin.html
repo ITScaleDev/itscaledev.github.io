@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin | DayBreak Cafe Orders</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/style.css">
+<style>
+body { font-family: Arial, sans-serif; padding: 20px; background:#f9fafb; }
+h2 { margin-bottom: 20px; }
+.card { background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: 20px; }
+button { background: #ef4444; color: #fff; border: none; padding: 5px 12px; border-radius: 6px; cursor: pointer; }
+button:hover { background: #b91c1c; }
+table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+th { background: #f3f4f6; }
+</style>
+</head>
+<body>
+
+<h2>DayBreak Cafe - Admin Orders</h2>
+
+<div class="card" id="ordersSection">
+  <table>
+    <thead>
+      <tr>
+        <th>Order #</th>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Items</th>
+        <th>Total</th>
+        <th>Time</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="ordersTable"></tbody>
+  </table>
+</div>
+
+<script>
+// Basic Password Security
+const password = prompt("Enter Admin Password:");
+if(password !== "DayBreak123") { alert("Wrong password!"); window.location.href="index.html"; }
+
+// Load orders from localStorage
+function loadOrders() {
+  const orders = JSON.parse(localStorage.getItem("daybreakOrders"))||[];
+  const tbody = document.getElementById("ordersTable");
+  tbody.innerHTML = "";
+  orders.forEach((order,index) => {
+    tbody.innerHTML += `
+      <tr>
+        <td>${order.orderNumber}</td>
+        <td>${order.customerName}</td>
+        <td>${order.customerPhone}</td>
+        <td>${order.items.map(i=>i.name+" ($"+i.price.toFixed(2)+")").join(", ")}</td>
+        <td>$${order.total.toFixed(2)}</td>
+        <td>${order.time}</td>
+        <td>${order.status}</td>
+        <td><button onclick="deleteOrder(${index})">Delete</button></td>
+      </tr>
+    `;
+  });
+}
+
+function deleteOrder(index){
+  const orders = JSON.parse(localStorage.getItem("daybreakOrders"))||[];
+  orders.splice(index,1);
+  localStorage.setItem("daybreakOrders",JSON.stringify(orders));
+  loadOrders();
+}
+
+loadOrders();
+</script>
+</body>
+</html>
