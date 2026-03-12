@@ -41,9 +41,6 @@ body {
   font-size: 0.95rem;
 }
 
-.site-header nav a[aria-current="page"] {
-  border-bottom: 2px solid #ffb74d;
-}
 
 .nav-toggle {
   display: none;
@@ -442,3 +439,4 @@ body {
     align-items: flex-start;
   }
 }
+
